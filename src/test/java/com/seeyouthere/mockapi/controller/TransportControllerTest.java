@@ -1,13 +1,17 @@
 package com.seeyouthere.mockapi.controller;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class LocationControllerTest {
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class TransportControllerTest {
 
     @LocalServerPort
     int port;
@@ -18,25 +22,11 @@ class LocationControllerTest {
     }
 
     @Test
-    void coordinate() {
+    void subway() {
         String response = RestAssured.given()
-            .queryParam("query", "주소")
+            .contentType(MediaType.APPLICATION_XML_VALUE)
             .when()
-            .get("/v2/local/search/address.json")
-            .then().statusCode(200)
-            .extract().asString();
-
-        System.out.println(response);
-
-    }
-
-    @Test
-    void location() {
-        String response = RestAssured.given()
-            .queryParam("x", "123.1231234134")
-            .queryParam("y", "123.123123123123")
-            .when()
-            .get("/v2/local/geo/coord2regioncode.json")
+            .get("/getPathInfoBySubway")
             .then().statusCode(200)
             .extract().asString();
 
@@ -44,11 +34,11 @@ class LocationControllerTest {
     }
 
     @Test
-    void searchKeyword() {
+    void bus() {
         String response = RestAssured.given()
-            .queryParam("query", "keyword")
+            .contentType(MediaType.APPLICATION_XML_VALUE)
             .when()
-            .get("/v2/local/search/keyword.json")
+            .get("/getPathInfoByBus")
             .then().statusCode(200)
             .extract().asString();
 
@@ -56,12 +46,11 @@ class LocationControllerTest {
     }
 
     @Test
-    void utilityResponse() {
+    void busAndSubway() {
         String response = RestAssured.given()
-            .queryParam("x", "x")
-            .queryParam("y", "y")
+            .contentType(MediaType.APPLICATION_XML_VALUE)
             .when()
-            .get("/v2/local/search/category.json")
+            .get("/getPathInfoByBusNSub")
             .then().statusCode(200)
             .extract().asString();
 

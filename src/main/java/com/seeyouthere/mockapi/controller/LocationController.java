@@ -11,21 +11,21 @@ public class LocationController {
 
     @GetMapping("/search/address.json")
     public String coordinate() {
-        return ResponseLocationExamples.COORDINATE.getCoordinate();
+        return ResponseLocationExamples.COORDINATE.getData();
     }
 
     @GetMapping("/geo/coord2regioncode.json")
     public String location() {
-        return "hi";
+        return ResponseLocationExamples.LOCATION.getData();
     }
 
-    @GetMapping("/search/keyboard.json")
+    @GetMapping("/search/keyword.json")
     public String search() {
-        return "bye";
+        return ResponseLocationExamples.KEYWORD.getData();
     }
 
     @GetMapping("/search/category.json")
     public String utility() {
-        return "hi";
+        return ResponseLocationExamples.CATEGORY.getData();
     }
 }
