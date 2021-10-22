@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(consumes = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_XML_VALUE)
 public class TransportController {
 
     @GetMapping(value = "/getPathInfoBySubway")

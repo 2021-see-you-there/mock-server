@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
 
     @PostMapping("/oauth/token")
     public String oauthToken(@RequestParam String code) {
         String data = "{\n"
-            + "    \"access_token\":\"%s\"\n"
+            + "    \"token_type\":\"bearer\",\n"
+            + "    \"access_token\":\"%s\",\n"
+            + "    \"expires_in\":43199,\n"
+            + "    \"refresh_token\":\"{REFRESH_TOKEN}\",\n"
+            + "    \"refresh_token_expires_in\":25184000,\n"
+            + "    \"scope\":\"account_email profile\"\n"
             + "}";
         return String.format(data, code);
     }
