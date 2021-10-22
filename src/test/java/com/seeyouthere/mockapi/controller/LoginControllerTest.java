@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class LoginControllerTest {
@@ -21,6 +22,7 @@ class LoginControllerTest {
     @Test
     void userToken() {
         String before = RestAssured.given()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when()
             .post("/oauth/token?code=12341234")
             .then().statusCode(200)
@@ -31,6 +33,7 @@ class LoginControllerTest {
         String data = before.split("\n")[1].split(":")[1];
 
         String response = RestAssured.given()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
             .header("Authorization", "Bearer " + data)
             .when()
             .post("/v2/user/me")

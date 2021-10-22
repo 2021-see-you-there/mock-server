@@ -1,12 +1,13 @@
 package com.seeyouthere.mockapi.controller;
 
 import com.seeyouthere.mockapi.domain.ResponseLocationExamples;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v2/local")
+@RequestMapping(value = "/v2/local", consumes =  MediaType.APPLICATION_JSON_VALUE)
 public class LocationController {
 
     @GetMapping("/search/address.json")
