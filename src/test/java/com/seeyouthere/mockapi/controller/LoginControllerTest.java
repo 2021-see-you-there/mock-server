@@ -22,7 +22,7 @@ class LoginControllerTest {
     void userToken() {
         String before = RestAssured.given()
             .when()
-            .get("/oauth/token?code=12341234")
+            .post("/oauth/token?code=12341234")
             .then().statusCode(200)
             .extract().asString();
 
